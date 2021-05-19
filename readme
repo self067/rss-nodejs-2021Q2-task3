@@ -6,9 +6,12 @@
 4. ошибка в импорте Game. исправлено на  require("../models/game"). исправлена строка 2 в файле controllers/gamecontroller.js
 5. отсутствует module.exports. добавлено module.exports = . исправлена строка 1 в файле models/game.js
 6. ошибка экспорта routers должно быть router. исправлено на module.exports = router. исправлена строка 112 в файле controllers/gamecontroller.js
-
+7. db.sync is not a function. добавлен module.exports = sequelize; . добавлено строке 24 в конце файла db.js
+8. ошибка в импорте User. исправлено на  require("../models/user"). исправлена строка 2 в файле middleware\validate-session.js
+9. 
 
 Найденные ошибки логики приложения
 <описание ошибки>. <описание исправления>. Исправлена(ы) строка(и) <номер(а) строк> в файле <относительный путь к файлу из корневой папки> ...
+
 Рефактор кода
 <Описание, что было изменено>
