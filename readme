@@ -5,6 +5,7 @@
 3. ошибка в импорте User. исправлено на  require("../models/user"). исправлена строка 5 в файле controllers/usercontroller.js
 4. ошибка в импорте Game. исправлено на  require("../models/game"). исправлена строка 2 в файле controllers/gamecontroller.js
 5. отсутствует module.exports. добавлено module.exports = . исправлена строка 1 в файле models/game.js
+6. ошибка экспорта routers должно быть router. исправлено на module.exports = router. исправлена строка 112 в файле controllers/gamecontroller.js
 
 
 Найденные ошибки логики приложения
