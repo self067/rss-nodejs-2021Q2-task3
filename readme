@@ -1,0 +1,37 @@
+Найденные ошибки компиляции
+<описание ошибки>. <описание исправления>. Исправлена(ы) строка(и) <номер(а) строк> в файле <относительный путь к файлу из корневой папки> ...
+1. неверно импортируется Router() . заменено на var router = require("express").Router(); .исправлена строка 1 в файле controllers/usercontroller.js
+2. ошибка в имени пакета bcryptjs . исправлено bcrypt на bcryptjs. исправлена строка 2 в файле controllers/usercontroller.js
+3. отсутствует module.exports. добавлено module.exports = . исправлена строка 1 в файле models/game.js
+4. ошибка экспорта routers должно быть router. исправлено на module.exports = router. исправлена строка 112 в файле controllers/gamecontroller.js
+5. db.sync is not a function. добавлен module.exports = sequelize; . добавлено строке 24 в конце файла db.js
+6. ошибка в импорте User. исправлено на  var User = require('../db').import('../models/user'); . исправлена строка 2 в файле middleware\validate-session.js
+
+Найденные ошибки логики приложения
+<описание ошибки>. <описание исправления>. Исправлена(ы) строка(и) <номер(а) строк> в файле <относительный путь к файлу из корневой папки> ...
+1. не указан номер порта. добавлен параметр 4000 в вызов app.listen. исправлена строка 13 в файле app.js
+2. используется устаревший body-parser. исправлено на express.json(). исправлена строка 9 в файле app.js
+3. по умолчанию используемый порт для обращения к бд 5432. задание порта бд port: "5433". добавлены 5 строка в .env и 11 строка в  db.js
+4. нет подключения к бд . используется устаревший пакет pg. обновление версии пакета pg до 8.6.0 
+5. отсутствуют ; в трех местах в файле app.js . добавлены ; в стр 5, 11, 15 в файле app.js
+6. не указан путь для middleware валидации . добавлен путь '/api/game' . исправлена стр 10 в файле app.js 
+7. ошибка в имени passwordHash. маленькая буква h . исправлена h на H в стр 11 файл usercontroller.js
+8. имя параметра неверное в функции успеха в then. исправлен параметр data на games . исправлена стр 5 в файле gamecontrollers.js
+
+
+Рефактор кода
+<Описание, что было изменено>
+1. добавлен .env для параметров подключения к БД, в файле db.js  параметры для подключения берутся из .env
+2. изменено объявление переменных с var на const
+3. изменено объявление функций с function на стрелочные
+4. изменено объявление переменной token с let на const usercontroller.js стр15
+5. устаревший пакет sequelize. обновлен до v6
+6. исправлена стр5 в файле usercontroller.js на const User = require('../models/user')(require('../db'));
+7. исправлена стр2 в файле gamecontroller.js на const Game = require('../models/game')(require('../db'));
+8. в модели user.js  
+добавлена строка 1 const { DataTypes } = require('sequelize');
+исправлена стр2    module.exports = (sequelize) => {
+9. в модели game.js  
+добавлена строка 1 const { DataTypes } = require('sequelize');
+исправлена стр2    module.exports = (sequelize) => {
+10. стр 2 в файле validate-session исправлена на const User = require('../models/user')(require('../db'));
