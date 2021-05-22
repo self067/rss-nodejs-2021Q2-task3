@@ -1,19 +1,17 @@
 const jwt = require("jsonwebtoken");
-var User = require('../db').import('../models/user');
+const User = require('../models/user')(require('../db'));
 
-module.exports = function (req, res, next) {
+module.exports = (req, res, next) => {
   if (req.method == "OPTIONS") {
     next(); // allowing options as a method for request
   } else {
-    var sessionToken = req.headers.authorization;
-    console.log(sessionToken);
+    const sessionToken = req.headers.authorization;
     if (!sessionToken)
       return res
         .status(403)
         .send({ auth: false, message: "No token provided." });
     else {
       jwt.verify(sessionToken, "lets_play_sum_games_man", (err, decoded) => {
-        console.log(err, decoded);
         if (decoded) {
           User.findOne({ where: { id: decoded.id } }).then(
             (user) => {
@@ -21,12 +19,11 @@ module.exports = function (req, res, next) {
               console.log(`user: ${user}`);
               next();
             },
-            function () {
+            () => { //err
               res.status(401).send({ error: "not authorized" });
             }
           );
         } else {
-          console.log("else");
           res.status(400).send({ error: "not authorized" });
         }
       });
